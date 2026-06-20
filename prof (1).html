@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayashree — UI/UX Designer</title>
+<meta name="description" content="Jayashree — UI/UX Designer based in Salem, India. Portfolio featuring Cast Connect and Vela Senja case studies.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230b0b0c'/%3E%3Ctext x='50' y='68' font-size='60' font-family='Georgia,serif' font-style='italic' fill='%23cda35a' text-anchor='middle'%3Ej%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0c;
+    --bg-elev:#111113;
+    --surface:#15151a;
+    --surface-2:#1b1b20;
+    --border:#27272c;
+    --border-soft:rgba(255,255,255,0.08);
+    --text:#f2efe9;
+    --text-dim:#a3a09b;
+    --text-faint:#6c6a67;
+    --accent:#cda35a;
+    --accent-2:#e6c98f;
+    --accent-dim:rgba(205,163,90,0.14);
+    --max:1320px;
+    --pad:clamp(24px, 5vw, 64px);
+    --ease:cubic-bezier(.16,.84,.44,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  ul{list-style:none;}
+  input,textarea{font-family:inherit;background:none;border:none;color:inherit;outline:none;}
+
+  ::selection{background:var(--accent);color:#0b0b0c;}
+
+  .serif{font-family:'Fraunces',serif;}
+  .accent-italic{font-family:'Fraunces',serif;font-style:italic;color:var(--accent-2);font-weight:400;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:18px;height:1px;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
+
+  /* ---------- custom cursor ---------- */
+  .cursor-ring{
+    position:fixed;top:0;left:0;width:26px;height:26px;
+    border:1px solid var(--text);border-radius:50%;
+    pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:width .25s var(--ease),height .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
+    mix-blend-mode:difference;
+  }
+  .cursor-ring.hover{width:54px;height:54px;background:var(--text);}
+  .cursor-dot{
+    position:fixed;top:0;left:0;width:4px;height:4px;border-radius:50%;
+    background:var(--accent);pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%);
+  }
+  @media (pointer:coarse){ .cursor-ring,.cursor-dot{display:none;} }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:500;
+    background:rgba(11,11,12,0.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:78px;
+  }
+  .logo{
+    display:flex;align-items:baseline;gap:8px;
+    font-family:'Fraunces',serif;font-size:22px;font-weight:500;
+  }
+  .logo span{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:var(--text-dim);font-size:16px;}
+  .nav-links{display:flex;gap:36px;}
+  .nav-links a{
+    font-size:14.5px;color:var(--text-dim);position:relative;
+    transition:color .25s var(--ease);
+  }
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;
+    background:var(--accent);transition:width .3s var(--ease);
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-right{display:flex;align-items:center;gap:16px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;border-radius:99px;
+    font-size:14px;font-weight:500;
+    transition:transform .3s var(--ease),background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);
+    white-space:nowrap;
+  }
+  .btn svg{width:14px;height:14px;}
+  .btn-solid{background:var(--text);color:#0b0b0c;}
+  .btn-solid:hover{background:var(--accent-2);transform:translateY(-2px);}
+  .btn-outline{border:1px solid var(--border);color:var(--text);}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent-2);transform:translateY(-2px);}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  .burger{display:none;width:32px;height:32px;flex-direction:column;justify-content:center;gap:6px;}
+  .burger span{display:block;width:100%;height:1px;background:var(--text);transition:.3s var(--ease);}
+  .mobile-panel{
+    position:fixed;top:78px;left:0;right:0;background:var(--bg-elev);
+    border-bottom:1px solid var(--border);
+    display:flex;flex-direction:column;padding:8px var(--pad) 28px;
+    transform:translateY(-110%);transition:transform .35s var(--ease);
+    z-index:400;
+  }
+  .mobile-panel.open{transform:translateY(0);}
+  .mobile-panel a{padding:14px 0;border-bottom:1px solid var(--border-soft);font-size:16px;color:var(--text-dim);}
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:170px;padding-bottom:0;position:relative;}
+  .hero-glow{
+    position:absolute;top:-120px;right:-160px;width:560px;height:560px;
+    background:radial-gradient(circle,var(--accent-dim),transparent 70%);
+    pointer-events:none;filter:blur(10px);
+  }
+  .hero-badges{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;
+    color:var(--text-faint);text-transform:uppercase;
+    padding-bottom:48px;flex-wrap:wrap;gap:10px;
+  }
+  .hero-badges .center{color:var(--text-dim);}
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(40px, 7.4vw, 92px);
+    line-height:1.06;
+    letter-spacing:-0.01em;
+    max-width:1000px;
+  }
+  .hero-bottom{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;
+    margin-top:56px;padding-bottom:64px;
+    align-items:start;
+  }
+  .hero-bio{font-size:17px;color:var(--text-dim);max-width:480px;line-height:1.65;}
+  .hero-bio b{color:var(--text);font-weight:600;}
+  .hero-ctas{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;}
+  .stat-list{display:flex;flex-direction:column;gap:0;}
+  .stat-row{
+    display:flex;align-items:baseline;gap:22px;
+    padding:16px 0;border-bottom:1px solid var(--border-soft);
+  }
+  .stat-row:first-child{padding-top:0;}
+  .stat-num{font-family:'Fraunces',serif;font-size:34px;font-weight:500;color:var(--text);min-width:84px;}
+  .stat-label{font-size:13.5px;color:var(--text-faint);line-height:1.4;}
+
+  /* marquee */
+  .marquee{
+    border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    overflow:hidden;padding:22px 0;white-space:nowrap;
+  }
+  .marquee-track{display:flex;width:max-content;animation:scroll 32s linear infinite;}
+  .marquee-track span{
+    font-family:'Fraunces',serif;font-style:italic;font-size:26px;
+    color:var(--text-faint);padding:0 28px;display:flex;align-items:center;gap:28px;
+  }
+  .marquee-track span::after{content:'·';font-style:normal;color:var(--accent);}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- generic section ---------- */
+  section{padding:120px 0;position:relative;}
+  .sec-head{
+    display:grid;grid-template-columns:1.4fr 1fr;gap:40px;
+    margin-bottom:64px;align-items:end;
+  }
+  .sec-head h2{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:clamp(32px,4.6vw,54px);line-height:1.12;
+    margin-top:18px;
+  }
+  .sec-sub{color:var(--text-dim);font-size:16px;line-height:1.65;max-width:380px;}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* ---------- work ---------- */
+  .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;}
+  .work-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    overflow:hidden;transition:border-color .4s var(--ease),transform .4s var(--ease);
+  }
+  .work-card:hover{border-color:var(--border-soft);transform:translateY(-4px);}
+  .work-tags{display:flex;gap:8px;padding:22px 24px 0;flex-wrap:wrap;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--text-dim);
+    border:1px solid var(--border);border-radius:99px;padding:6px 13px;
+  }
+  .work-visual{padding:28px 24px 8px;display:flex;justify-content:center;min-height:340px;align-items:center;}
+  .work-meta{padding:8px 26px 28px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;}
+  .work-meta h3{font-family:'Fraunces',serif;font-size:25px;font-weight:500;}
+  .work-meta p{color:var(--text-faint);font-size:13.5px;font-family:'JetBrains Mono',monospace;}
+  .work-tagline{color:var(--text-dim);font-size:14px;margin-top:6px;}
+  .work-desc{padding:0 26px 28px;color:var(--text-dim);font-size:14.5px;line-height:1.65;border-top:1px solid var(--border-soft);margin-top:0;padding-top:22px;}
+
+  .ghost-card{
+    border:1px dashed var(--border);border-radius:20px;
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    min-height:100%;padding:44px 32px;gap:18px;
+  }
+  .ghost-icon{
+    width:46px;height:46px;border-radius:50%;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--accent);
+  }
+  .ghost-card h3{font-family:'Fraunces',serif;font-size:24px;font-weight:500;}
+  .ghost-card p{color:var(--text-dim);font-size:14.5px;line-height:1.6;max-width:280px;}
+  .ghost-link{display:inline-flex;align-items:center;gap:8px;color:var(--accent-2);font-size:14px;font-weight:500;margin-top:4px;}
+  .ghost-link svg{width:14px;height:14px;transition:transform .3s var(--ease);}
+  .ghost-link:hover svg{transform:translate(3px,-3px);}
+
+  /* phone mockup */
+  .phone{
+    width:248px;height:500px;
+    background:linear-gradient(160deg,#1c1c20,#0d0d0e);
+    border-radius:38px;border:1px solid #2c2c31;
+    padding:12px;transform:rotate(-4deg);
+    box-shadow:0 40px 70px -30px rgba(0,0,0,0.7);
+    position:relative;
+  }
+  .phone-screen{
+    background:#0e0e10;border-radius:28px;height:100%;overflow:hidden;
+    display:flex;flex-direction:column;
+    font-family:'Inter',sans-serif;
+  }
+  .pscreen-bar{display:flex;justify-content:space-between;padding:14px 18px 6px;font-size:10px;color:#7c7a77;}
+  .pscreen-head{display:flex;justify-content:space-between;align-items:center;padding:6px 18px 12px;}
+  .pscreen-head b{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:#f2efe9;}
+  .pscreen-bag{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;}
+  .pscreen-bag svg{width:13px;height:13px;color:var(--accent-2);}
+  .pscreen-search{margin:0 16px 14px;background:#191a1d;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:8px;color:#6f6d6a;font-size:11px;}
+  .pscreen-search svg{width:13px;height:13px;flex-shrink:0;}
+  .pscreen-promo{
+    margin:0 16px 16px;border-radius:14px;padding:16px;
+    background:linear-gradient(135deg,#cda35a,#8a6a37);
+    position:relative;overflow:hidden;
+  }
+  .pscreen-promo::after{content:'';position:absolute;right:-20px;top:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,0.12);}
+  .pscreen-promo b{font-size:13.5px;color:#1a1208;display:block;}
+  .pscreen-promo span{font-size:10.5px;color:#3a2c12;}
+  .pscreen-sectitle{padding:0 18px 10px;font-size:11px;color:#88857f;letter-spacing:.04em;}
+  .pscreen-card{margin:0 16px 10px;display:flex;gap:10px;align-items:center;background:#16161a;border-radius:12px;padding:9px;}
+  .pscreen-thumb{width:42px;height:42px;border-radius:9px;flex-shrink:0;}
+  .pscreen-thumb.t1{background:linear-gradient(135deg,#e6c98f,#a9762f);}
+  .pscreen-thumb.t2{background:linear-gradient(135deg,#8f8d88,#37352f);}
+  .pscreen-card .pc-name{font-size:11.5px;color:#f0eee9;font-weight:500;}
+  .pscreen-card .pc-meta{font-size:9.5px;color:#7c7a77;margin-top:2px;}
+  .pscreen-nav{margin-top:auto;display:flex;justify-content:space-around;padding:14px 10px;border-top:1px solid #1e1e22;}
+  .pscreen-nav svg{width:16px;height:16px;color:#5d5b58;}
+  .pscreen-nav .active svg{color:var(--accent-2);}
+
+  /* phone mockup — light theme variant (Vela Senja) */
+  .phone.theme-light .phone-screen{background:#f5f4fb;}
+  .phone.theme-light .pscreen-bar{color:#8b87a0;}
+
+  /* Cast Connect (casting platform) mockup */
+  .cc-hero{
+    position:relative;margin:0 16px 14px;height:138px;border-radius:14px;overflow:hidden;
+    background:radial-gradient(circle at 28% 0%, rgba(205,163,90,0.32), transparent 55%),
+               radial-gradient(circle at 78% 8%, rgba(205,163,90,0.22), transparent 50%),
+               linear-gradient(180deg,#2a2a2f 0%, #121214 100%);
+  }
+  .cc-hero::before{
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(100deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 40px);
+    mix-blend-mode:screen;
+  }
+  .cc-badge{
+    position:absolute;left:12px;bottom:12px;display:flex;align-items:center;gap:5px;
+    background:rgba(205,163,90,0.92);color:#1a1208;font-size:9px;font-weight:600;
+    padding:4px 9px;border-radius:99px;
+  }
+  .cc-name{padding:0 18px 0;font-family:'Fraunces',serif;font-size:18px;color:#f2efe9;font-weight:500;}
+  .cc-role{padding:2px 18px 12px;font-size:11px;color:#8b8985;}
+  .cc-stats-row{display:flex;align-items:center;justify-content:space-between;padding:0 16px 14px;}
+  .cc-nums{display:flex;gap:14px;}
+  .cc-nums div{font-size:12px;color:var(--accent-2);font-weight:600;}
+  .cc-nums span{display:block;font-size:8.5px;color:#7c7a77;font-weight:400;margin-top:1px;}
+  .cc-book-btn{background:var(--accent);color:#1a1208;font-size:10.5px;font-weight:600;padding:7px 14px;border-radius:8px;}
+  .cc-divider{margin:0 16px;border-top:1px solid #1e1e22;}
+  .cc-section-title{padding:14px 18px 6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);}
+  .cc-bio{padding:0 18px 10px;font-size:10.5px;line-height:1.5;color:#8b8985;}
+  .cc-chips{display:flex;gap:6px;padding:0 18px 6px;flex-wrap:wrap;}
+  .cc-chip{font-size:8.5px;color:#6f6d6a;border:1px solid #2a2a2f;padding:3px 8px;border-radius:99px;}
+  .cc-thumbs{display:flex;gap:8px;padding:0 18px;margin-top:auto;padding-bottom:16px;}
+  .cc-thumb{flex:1;aspect-ratio:1;border-radius:8px;}
+  .cc-thumb.a{background:linear-gradient(150deg,#3a3a3f,#16161a);}
+  .cc-thumb.b{background:linear-gradient(150deg,#8a6a37,#1c1c20);}
+  .cc-thumb.c{background:linear-gradient(150deg,#2a2a2f,#0c0c0d);display:flex;align-items:center;justify-content:center;font-size:11px;color:#8b8985;font-family:'JetBrains Mono',monospace;}
+
+  /* Vela Senja (parent dashboard) mockup */
+  .vs-header{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 14px;}
+  .vs-logo{display:flex;align-items:center;gap:8px;}
+  .vs-logo-icon{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#6c5dfb,#4b3ffa);display:flex;align-items:center;justify-content:center;}
+  .vs-wordmark{font-family:'Fraunces',serif;font-weight:600;font-size:14px;color:#372fb8;}
+  .vs-bell{width:20px;height:20px;color:#8b87a0;}
+  .vs-earn-card{margin:0 14px 12px;background:#fff;border:1px solid #ece9f7;border-radius:14px;padding:14px 16px;}
+  .vs-earn-label{font-size:9.5px;color:#8b87a0;}
+  .vs-earn-row{display:flex;align-items:baseline;justify-content:space-between;margin-top:6px;}
+  .vs-earn-amt{font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:#372fb8;}
+  .vs-earn-badge{background:#dff5ea;color:#137a4d;font-size:9px;font-weight:600;padding:3px 8px;border-radius:99px;}
+  .vs-stat-row{display:flex;gap:10px;padding:0 14px 14px;}
+  .vs-stat-card{flex:1;background:#eceafb;border-radius:12px;padding:10px 12px;}
+  .vs-stat-card.b{background:#e3f1ec;}
+  .vs-stat-card .label{font-size:8px;color:#8b87a0;letter-spacing:.03em;text-transform:uppercase;}
+  .vs-stat-card .val{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:#372fb8;margin-top:3px;}
+  .vs-stat-card.b .val{color:#137a4d;}
+  .vs-section{display:flex;justify-content:space-between;align-items:center;padding:4px 14px 8px;}
+  .vs-section span:first-child{font-size:12px;font-weight:600;color:#211c3d;}
+  .vs-section span:last-child{font-size:9.5px;color:#4b3ffa;}
+  .vs-task{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #ece9f7;border-radius:12px;padding:9px 10px;margin:0 14px 8px;}
+  .vs-task-icon{width:30px;height:30px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .vs-task-icon.orange{background:#fbe6cf;}
+  .vs-task-icon.purple{background:#e6e3fb;}
+  .vs-task-name{font-size:11px;font-weight:600;color:#211c3d;}
+  .vs-task-tag{display:inline-flex;gap:4px;margin-top:3px;}
+  .vs-task-tag span{font-size:7.5px;padding:2px 6px;border-radius:99px;background:#eef1f9;color:#5b5870;}
+  .vs-task-tag .urgent{background:#caa24a;color:#2c1c04;}
+  .vs-task-price{font-size:11px;font-weight:700;color:#137a4d;margin-left:auto;}
+  .vs-goal{margin:12px 14px 0;border-radius:14px;padding:16px;background:linear-gradient(135deg,#5a4bf5,#372fb8);position:relative;overflow:hidden;}
+  .vs-goal::after{content:'';position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,0.08);}
+  .vs-goal b{font-size:11.5px;color:#fff;display:block;margin-bottom:4px;}
+  .vs-goal p{font-size:9px;color:#d8d4fb;line-height:1.5;margin-bottom:10px;}
+  .vs-btn{display:inline-block;background:#fff;color:#372fb8;font-size:9.5px;font-weight:600;padding:6px 12px;border-radius:8px;}
+
+  .more-projects-cta{
+    margin-top:28px;border:1px dashed var(--border);border-radius:16px;
+    padding:22px 28px;display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:14px;color:var(--text-dim);font-size:14.5px;
+  }
+  .more-projects-cta a{display:inline-flex;align-items:center;gap:8px;color:var(--accent-2);font-weight:500;white-space:nowrap;}
+  .more-projects-cta a svg{width:14px;height:14px;transition:transform .3s var(--ease);}
+  .more-projects-cta a:hover svg{transform:translate(3px,-3px);}
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .skill-card{
+    border:1px solid var(--border);border-radius:14px;padding:22px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .skill-top{display:flex;justify-content:space-between;align-items:baseline;}
+  .skill-top span:first-child{font-size:16px;font-weight:500;}
+  .skill-top span:last-child{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-faint);}
+  .skill-bar{height:1px;background:var(--border);position:relative;}
+  .skill-bar i{position:absolute;left:0;top:0;height:1px;background:var(--accent);width:0;transition:width 1.4s var(--ease);}
+
+  /* ---------- process ---------- */
+  .process-row{display:grid;grid-template-columns:repeat(7,1fr);gap:20px;}
+  .process-step{padding-top:26px;border-top:1px solid var(--border);position:relative;}
+  .process-step::before{
+    content:'';position:absolute;top:-4.5px;left:0;width:8px;height:8px;border-radius:50%;
+    background:var(--bg);border:1px solid var(--accent);
+  }
+  .process-step h4{font-size:16px;font-weight:600;margin-bottom:10px;}
+  .process-step p{font-size:13px;color:var(--text-faint);line-height:1.55;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:56px;align-items:start;}
+  .avatar-card{
+    aspect-ratio:4/5;border-radius:20px;
+    background:linear-gradient(155deg,#1d1d22,#0c0c0d);
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .avatar-card .mono-letter{
+    font-family:'Fraunces',serif;font-style:italic;font-size:180px;color:var(--accent);opacity:.9;
+  }
+  .avatar-card::before{
+    content:'';position:absolute;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,var(--accent-dim),transparent 72%);
+  }
+  .currently-pill{
+    margin-top:18px;border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);
+  }
+  .currently-pill b{color:var(--text);display:flex;align-items:center;gap:8px;font-weight:500;}
+  .dot-live{width:7px;height:7px;border-radius:50%;background:#7ad99b;box-shadow:0 0 0 0 rgba(122,217,155,.5);animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(122,217,155,.45);}70%{box-shadow:0 0 0 8px rgba(122,217,155,0);}100%{box-shadow:0 0 0 0 rgba(122,217,155,0);}}
+
+  .about-copy h2{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(28px,4vw,44px);line-height:1.18;margin-bottom:24px;
+  }
+  .about-copy p{color:var(--text-dim);font-size:16px;line-height:1.75;margin-bottom:18px;max-width:560px;}
+  .about-info{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;}
+  .info-card{border:1px solid var(--border);border-radius:14px;padding:18px 18px 20px;}
+  .info-card .eyebrow{margin-bottom:10px;font-size:10.5px;}
+  .info-card p{font-size:14px;color:var(--text);line-height:1.5;}
+
+  /* ---------- education ---------- */
+  .edu-card{
+    border:1px solid var(--border);border-radius:20px;padding:40px;
+    display:grid;grid-template-columns:160px 1fr;gap:32px;align-items:start;
+  }
+  .edu-years{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);}
+  .edu-card h3{font-family:'Fraunces',serif;font-size:28px;font-weight:500;margin:10px 0 4px;}
+  .edu-card .edu-school{font-family:'Fraunces',serif;font-style:italic;color:var(--text-dim);font-size:16px;}
+  .edu-card p.desc{color:var(--text-dim);font-size:14.5px;line-height:1.65;margin-top:14px;max-width:520px;}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;}
+  .contact-info-item{padding:20px 0;border-bottom:1px solid var(--border-soft);}
+  .contact-info-item .eyebrow{margin-bottom:10px;font-size:10.5px;}
+  .contact-info-item a,.contact-info-item span{font-size:18px;font-family:'Fraunces',serif;}
+  .socials{display:flex;gap:22px;margin-top:24px;flex-wrap:wrap;}
+  .socials a{font-size:14.5px;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:4px;transition:.3s var(--ease);}
+  .socials a:hover{color:var(--accent-2);border-color:var(--accent-2);}
+
+  .form-card{border:1px solid var(--border);border-radius:20px;padding:38px;background:var(--surface);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:26px;}
+  .field label{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--text-faint);display:block;margin-bottom:10px;
+  }
+  .field input,.field textarea{
+    width:100%;border-bottom:1px solid var(--border);padding:8px 0 10px;font-size:15px;color:var(--text);
+    transition:border-color .3s var(--ease);
+  }
+  .field textarea{resize:none;height:90px;font-family:inherit;line-height:1.5;}
+  .field input::placeholder,.field textarea::placeholder{color:var(--text-faint);}
+  .field input:focus,.field textarea:focus{border-color:var(--accent);}
+  .field{margin-bottom:26px;}
+  .form-note{font-size:12.5px;color:var(--text-faint);margin-top:18px;}
+  .form-status{font-size:13px;color:var(--accent-2);margin-top:14px;min-height:18px;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--border);padding:90px 0 40px;}
+  .footer-cta{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(34px,6.4vw,72px);line-height:1.05;margin-bottom:60px;}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    padding-top:30px;border-top:1px solid var(--border-soft);flex-wrap:wrap;gap:20px;
+  }
+  .footer-meta{text-align:right;color:var(--text-faint);font-size:13px;line-height:1.7;}
+  .footer-meta b{color:var(--text-dim);}
+  .made-with{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-faint);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero-bottom{grid-template-columns:1fr;gap:36px;}
+    .work-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    .process-row{grid-template-columns:repeat(2,1fr);row-gap:32px;}
+    .about-grid{grid-template-columns:1fr;}
+    .avatar-card{max-width:280px;}
+    .about-info{grid-template-columns:1fr;}
+    .edu-card{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .sec-head{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;align-items:flex-start;}
+    .footer-meta{text-align:left;}
+  }
+  @media (max-width:560px){
+    section{padding:84px 0;}
+    .hero{padding-top:130px;}
+    .phone{transform:rotate(0deg);width:220px;height:450px;}
+    .hero-badges{font-size:10px;}
+    .hero-badges .center{display:none;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#hero" class="logo">Jayashree <span>designer</span></a>
+      <nav class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <a href="#contact" class="btn btn-solid">Let's talk</a>
+        <button class="burger" id="burger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#work">Work</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-glow"></div>
+      <div class="wrap">
+        <div class="hero-badges">
+          <span>Portfolio — Vol. 01</span>
+          <span class="center">Based in Salem · Open to opportunities</span>
+          <span>2026</span>
+        </div>
+        <h1>Designing screens that <span class="accent-italic">feel obvious</span> in hindsight.</h1>
+
+        <div class="hero-bottom">
+          <div>
+            <p class="hero-bio">I'm <b>Jayashree</b> — an aspiring UI/UX designer based in Salem, blending a B.Com (Computer Applications) background with a growing focus on AI-powered product design. Currently looking for my first opportunity to design real-world experiences.</p>
+            <div class="hero-ctas">
+              <a href="#work" class="btn btn-solid">View my work <svg viewBox="0 0 24 24" fill="none"><path d="M7 7h10v10M7 17 17 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a href="#contact" class="btn btn-outline">Get in touch <svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+          <div class="stat-list">
+            <div class="stat-row"><span class="stat-num mono">02</span><span class="stat-label">Live case studies — Cast Connect & Vela Senja</span></div>
+            <div class="stat-row"><span class="stat-num mono">08</span><span class="stat-label">Core UI/UX skills in active, daily practice</span></div>
+            <div class="stat-row"><span class="stat-num mono">100%</span><span class="stat-label">Self-driven, curiosity-first learner</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee">
+        <div class="marquee-track">
+          <span><span>UI Design</span><span>UX Research</span><span>Wireframing</span><span>Prototyping</span><span>Visual Design</span><span>Figma</span><span>User Flows</span></span>
+          <span><span>UI Design</span><span>UX Research</span><span>Wireframing</span><span>Prototyping</span><span>Visual Design</span><span>Figma</span><span>User Flows</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div>
+            <span class="eyebrow">01 — Selected Work</span>
+            <h2>Case studies that <span class="accent-italic">started</span> it all.</h2>
+          </div>
+          <p class="sec-sub">Two early design projects — from problem framing to working prototypes. Built to learn, sharpened to ship.</p>
+        </div>
+
+        <div class="work-grid">
+          <div class="work-card reveal">
+            <div class="work-tags">
+              <span class="tag">Casting Platform</span><span class="tag">Mobile App</span><span class="tag">UI/UX</span>
+            </div>
+            <div class="work-visual">
+              <div class="phone">
+                <div class="phone-screen">
+                  <div class="pscreen-bar"><span>9:41</span><span>●●●</span></div>
+                  <div class="cc-hero">
+                    <div class="cc-badge"><svg viewBox="0 0 24 24" fill="none" width="9" height="9"><path d="M9 12.5l2 2 4-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Verified Talent</div>
+                  </div>
+                  <div class="cc-name">Julian Sterling</div>
+                  <div class="cc-role">Dramatic Lead · Action Performance</div>
+                  <div class="cc-stats-row">
+                    <div class="cc-nums">
+                      <div>42<span>Projects</span></div>
+                      <div>128K<span>Followers</span></div>
+                    </div>
+                    <div class="cc-book-btn">Book Talent</div>
+                  </div>
+                  <div class="cc-divider"></div>
+                  <div class="cc-section-title">Biography</div>
+                  <div class="cc-bio">Award-winning theatrical and film performer known for intense physical commitment and nuanced range.</div>
+                  <div class="cc-chips"><span class="cc-chip">Stunts</span><span class="cc-chip">Dialects</span><span class="cc-chip">Stage Combat</span></div>
+                  <div class="cc-thumbs">
+                    <div class="cc-thumb a"></div>
+                    <div class="cc-thumb b"></div>
+                    <div class="cc-thumb c">+8</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="work-meta">
+              <div>
+                <h3>Cast Connect</h3>
+                <p class="work-tagline">Connecting talent with their next opportunity.</p>
+              </div>
+              <p>2026 · UI/UX Design</p>
+            </div>
+            <div class="work-desc">A casting platform connecting actors, models, and filmmakers with verified opportunities — featuring talent profiles, demo reels, and a streamlined booking flow for casting directors and agencies.</div>
+          </div>
+
+          <div class="work-card reveal">
+            <div class="work-tags">
+              <span class="tag">Parenting App</span><span class="tag">FinTech</span><span class="tag">UI/UX</span>
+            </div>
+            <div class="work-visual">
+              <div class="phone theme-light">
+                <div class="phone-screen">
+                  <div class="pscreen-bar"><span>9:41</span><span>●●●</span></div>
+                  <div class="vs-header">
+                    <div class="vs-logo">
+                      <div class="vs-logo-icon"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M12 3a9 9 0 1 0 9 9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+                      <span class="vs-wordmark">Vela Senja</span>
+                    </div>
+                    <svg class="vs-bell" viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 1 1 12 0c0 3 1 4.5 1.5 5.5H4.5C5 13.5 6 12 6 9Z" stroke="currentColor" stroke-width="1.5"/><path d="M10 18a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.5"/></svg>
+                  </div>
+                  <div class="vs-earn-card">
+                    <div class="vs-earn-label">Total Earned This Month</div>
+                    <div class="vs-earn-row"><span class="vs-earn-amt">₹1,450</span><span class="vs-earn-badge">↑ +12%</span></div>
+                  </div>
+                  <div class="vs-stat-row">
+                    <div class="vs-stat-card"><div class="label">Pending</div><div class="val">₹250</div></div>
+                    <div class="vs-stat-card b"><div class="label">Active Tasks</div><div class="val">8</div></div>
+                  </div>
+                  <div class="vs-section"><span>Active Tasks</span><span>View History</span></div>
+                  <div class="vs-task">
+                    <div class="vs-task-icon orange"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M6 19h12M9 16l-3 3M9 16 16 9M16 9l-2-2 3-3 2 2-3 3Z" stroke="#a9650f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <div><div class="vs-task-name">Clean Room</div><div class="vs-task-tag"><span>Cleaning</span><span class="urgent">! Urgent</span></div></div>
+                    <div class="vs-task-price">₹50</div>
+                  </div>
+                  <div class="vs-task">
+                    <div class="vs-task-icon purple"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M4 6h16v12H4V6Z" stroke="#4b3ffa" stroke-width="1.5"/><path d="M8 10h2M14 10h2M8 14h8" stroke="#4b3ffa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                    <div><div class="vs-task-name">Maths Score</div><div class="vs-task-tag"><span>Learning</span></div></div>
+                    <div class="vs-task-price">₹100</div>
+                  </div>
+                  <div class="vs-goal">
+                    <b>New Goal: PS5 Controller</b>
+                    <p>Aria is 65% of the way to her savings goal!</p>
+                    <span class="vs-btn">Set Bonus</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="work-meta">
+              <div>
+                <h3>Vela Senja</h3>
+                <p class="work-tagline">Turning chores into earned trust.</p>
+              </div>
+              <p>2026 · UI/UX Design</p>
+            </div>
+            <div class="work-desc">A parent dashboard for managing kids' chores and allowance — parents review and approve tasks while kids track real earnings and work toward savings goals like a PS5 controller.</div>
+          </div>
+        </div>
+
+        <div class="more-projects-cta reveal">
+          <span>Currently sketching my next case study.</span>
+          <a href="#contact">Have a project for me? <svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div>
+            <span class="eyebrow">02 — Skills & Tools</span>
+            <h2>A toolkit I'm <span class="accent-italic">actively</span> building.</h2>
+          </div>
+          <p class="sec-sub">From early sketches to polished UI — the tools and skills I bring to every project, sharpened through daily practice.</p>
+        </div>
+
+        <div class="skills-grid reveal" id="skillsGrid">
+          <div class="skill-card"><div class="skill-top"><span>Figma</span><span class="mono">90</span></div><div class="skill-bar"><i data-val="90"></i></div></div>
+          <div class="skill-card"><div class="skill-top"><span>UI Design</span><span class="mono">88</span></div><div class="skill-bar"><i data-val="88"></i></div></div>
+          <div class="skill-card"><div class="skill-top"><span>Wireframing</span><span class="mono">85</span></div><div class="skill-bar"><i data-val="85"></i></div></div>
+          <div class="skill-card"><div class="skill-top"><span>Visual Design</span><span class="mono">86</span></div><div class="skill-bar"><i data-val="86"></i></div></div>
+          <div class="skill-card"><div class="skill-top"><span>Prototyping</span><span class="mono">82</span></div><div class="skill-bar"><i data-val="82"></i></div></div>
+          <div class="skill-card"><div class="skill-top"><span>Design Thinking</span><span class="mono">84</span></div><div class="skill-bar"><i data-val="84"></i></div></div>
+          <div class="skill-card"><div class="skill-top"><span>UX Research</span><span class="mono">78</span></div><div class="skill-bar"><i data-val="78"></i></div></div>
+          <div class="skill-card"><div class="skill-top"><span>Adobe XD</span><span class="mono">75</span></div><div class="skill-bar"><i data-val="75"></i></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div>
+            <span class="eyebrow">03 — Design Process</span>
+            <h2>A process I trust for <span class="accent-italic">every</span> project.</h2>
+          </div>
+          <p class="sec-sub">A repeatable rhythm I follow from a blank page to a finished screen — on every project, including Cast Connect and Vela Senja.</p>
+        </div>
+
+        <div class="process-row reveal">
+          <div class="process-step"><h4>Discover</h4><p>Problem framing, quick research, market scan.</p></div>
+          <div class="process-step"><h4>Define</h4><p>Pain points, goals, what success looks like.</p></div>
+          <div class="process-step"><h4>Ideate</h4><p>Sketches, mood boards, quick concepts.</p></div>
+          <div class="process-step"><h4>Design</h4><p>Wireframes, UI screens, a consistent system.</p></div>
+          <div class="process-step"><h4>Prototype</h4><p>Clickable flows to test before final build.</p></div>
+          <div class="process-step"><h4>Test</h4><p>Feedback loops, quick honest iteration.</p></div>
+          <div class="process-step"><h4>Deliver</h4><p>Polished files, notes, a case study write-up.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <span class="eyebrow reveal">04 — About</span>
+        <div class="about-grid" style="margin-top:24px;">
+          <div class="reveal">
+            <div class="avatar-card"><span class="mono-letter">J</span></div>
+            <div class="currently-pill">
+              <span>Currently</span>
+              <b><span class="dot-live"></span> Open to opportunities</b>
+            </div>
+          </div>
+          <div class="about-copy reveal">
+            <h2>I design with <span class="accent-italic">curiosity</span> — and I'm just getting started.</h2>
+            <p>I'm Jayashree, a UI/UX designer based in Salem, India. My path here wasn't typical — I started with a B.Com (Computer Applications) degree, which gave me an unusual lens: I think about design through structure, logic, and business goals, not just visuals.</p>
+            <p>I'm especially drawn to how AI is reshaping digital products, and I want to design the interfaces that make those tools feel simple, human, and trustworthy. I don't have a long resume yet — but I bring care, curiosity, and the discipline to finish what I start.</p>
+            <div class="about-info">
+              <div class="info-card"><span class="eyebrow">Background</span><p>B.Com (CA) → UI/UX Design</p></div>
+              <div class="info-card"><span class="eyebrow">Focus</span><p>Mobile apps & AI-powered products</p></div>
+              <div class="info-card"><span class="eyebrow">Status</span><p>Open to roles &amp; internships, worldwide</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div>
+            <span class="eyebrow">05 — Education</span>
+            <h2>Where the <span class="accent-italic">thinking</span> started.</h2>
+          </div>
+          <p class="sec-sub">A business and computer-applications foundation that now shapes how I approach every design problem.</p>
+        </div>
+
+        <div class="edu-card reveal">
+          <div class="edu-years mono">20XX — 20XX</div>
+          <div>
+            <h3>B.Com (Computer Applications)</h3>
+            <div class="edu-school">[Add your college / university name]</div>
+            <p class="desc">A foundation in business fundamentals, logic, and computer applications — the unexpected starting point for a design career. It's where I first learned to think in systems, not just screens.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="sec-head reveal" style="margin-bottom:48px;">
+          <div>
+            <span class="eyebrow">06 — Contact</span>
+            <h2>Let's create something <span class="accent-italic">good</span>.</h2>
+          </div>
+          <p class="sec-sub">I'm actively looking for my first role or freelance project in UI/UX design. If you have an opportunity in mind, I'd genuinely love to hear about it.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="reveal">
+            <div class="contact-info-item">
+              <span class="eyebrow">Email</span>
+              <a href="mailto:jayashree14jayis@gmail.com">jayashree14jayis@gmail.com</a>
+            </div>
+            <div class="contact-info-item">
+              <span class="eyebrow">Phone</span>
+              <a href="tel:+919994351577">+91 99943 51577</a>
+            </div>
+            <div class="contact-info-item">
+              <span class="eyebrow">Location</span>
+              <span>Salem, Tamil Nadu, India</span>
+            </div>
+            <div class="socials">
+              <a href="https://www.linkedin.com/in/jayashree-j-3563b8416" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+
+          <form class="form-card reveal" id="contactForm">
+            <div class="form-row">
+              <div class="field"><label for="fname">Your Name</label><input id="fname" type="text" placeholder="Full name" required></div>
+              <div class="field"><label for="femail">Email</label><input id="femail" type="email" placeholder="you@email.com" required></div>
+            </div>
+            <div class="field"><label for="fsubject">Subject</label><input id="fsubject" type="text" placeholder="What's this about?"></div>
+            <div class="field"><label for="fmessage">Message</label><textarea id="fmessage" placeholder="A few lines about the role or project..." required></textarea></div>
+            <button type="submit" class="btn btn-solid">Send message <svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <p class="form-note">Submitting opens your email app with this message pre-filled, addressed to Jayashree.</p>
+            <p class="form-status" id="formStatus"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <h2 class="footer-cta">Let's build something <span class="accent-italic">great</span>.</h2>
+      <div class="footer-bottom">
+        <span class="made-with">Jayashree · UI/UX Designer</span>
+        <div class="footer-meta">
+          <div>© <span id="year"></span> Jayashree</div>
+          <div><b>Fresher · Open to opportunities</b></div>
+          <div>Salem, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // custom cursor
+  const ring = document.getElementById('cursorRing');
+  const dot = document.getElementById('cursorDot');
+  const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+  if(!isCoarse){
+    window.addEventListener('mousemove', e=>{
+      ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+      dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+    });
+    document.querySelectorAll('a, button, .skill-card, .work-card').forEach(el=>{
+      el.addEventListener('mouseenter', ()=> ring.classList.add('hover'));
+      el.addEventListener('mouseleave', ()=> ring.classList.remove('hover'));
+    });
+  }
+
+  // mobile menu
+  const burger = document.getElementById('burger');
+  const panel = document.getElementById('mobilePanel');
+  burger.addEventListener('click', ()=>{
+    panel.classList.toggle('open');
+  });
+  panel.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> panel.classList.remove('open')));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=> io.observe(el));
+
+  // skill bars
+  const skillBars = document.querySelectorAll('.skill-bar i');
+  const skillIO = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        skillBars.forEach(bar=>{
+          bar.style.width = bar.dataset.val + '%';
+        });
+        skillIO.disconnect();
+      }
+    });
+  }, {threshold:0.2});
+  const skillsGrid = document.getElementById('skillsGrid');
+  if(skillsGrid) skillIO.observe(skillsGrid);
+
+  // contact form -> mailto
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const subject = document.getElementById('fsubject').value.trim() || 'Opportunity / Project Inquiry';
+    const message = document.getElementById('fmessage').value.trim();
+
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    const mailto = `mailto:jayashree14jayis@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    status.textContent = 'Opening your email app...';
+  });
+</script>
+</body>
+</html>
